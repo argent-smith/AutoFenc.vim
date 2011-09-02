@@ -207,7 +207,7 @@ call s:CheckAndSetVar('g:autofenc_autodetect_comment', 1)
 call s:CheckAndSetVar('g:autofenc_autodetect_num_of_lines', 5)
 call s:CheckAndSetVar('g:autofenc_autodetect_ext_prog', 1)
 call s:CheckAndSetVar('g:autofenc_ext_prog_path', 'enca')
-call s:CheckAndSetVar('g:autofenc_ext_prog_args', '-i -L czech')
+call s:CheckAndSetVar('g:autofenc_ext_prog_args', '-i')
 call s:CheckAndSetVar('g:autofenc_ext_prog_unknown_fenc', '???')
 
 "-------------------------------------------------------------------------------
@@ -552,6 +552,9 @@ endfunction
 " it does nothing so allow Vim to set its internal encoding instead.
 "-------------------------------------------------------------------------------
 function s:DetectAndSetFileEncoding()
+	" Turn off the interferring option
+	set fileencodings=
+
 	let enc = s:DetectFileEncoding()
 
 	" don't call again on the nested trigger from the edit
